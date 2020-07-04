@@ -19,7 +19,7 @@ var APIKey = "645a6f915fa06385ae3c8b3689dadec1";
 button.on("click", function(event){
   event.preventDefault();
 
-  // Store seach value into variable
+  // Store search value into variable
   var cityName = $("#input").val().trim();    
 
   // Weather API url including search input value and API key
@@ -31,13 +31,20 @@ button.on("click", function(event){
     method: "GET"
   }).then(function(response) {
     
-    console.log(response);
+    console.log(response.weather[0].icon);
     //Convert timestamp to readable format
     var m = moment.unix(response.dt).format("MM-DD-YYYY");
     $("#dt").text(m.toString()); 
           
     // Transfer content to HTML
     $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+
+    //Weather Icon
+    var iconCode = response.weather[0].icon;
+    var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    var weatherIcon = $("<img>").attr("id", "wicon").attr("src", iconURL).attr("alt", "Weather Icon");
+    $(".weatherIcon").append(weatherIcon);
+
     $(".wind").text("Wind Speed: " + response.wind.speed);
     $(".humidity").text("Humidity: " + response.main.humidity); 
 
