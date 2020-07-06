@@ -54,27 +54,83 @@
         <div class="row">
           <main class="col-12 main">            
             <h4 class="city"></h4>
-            <h4 id="dt"></h4>
+            <h5 class="date"></h5>
             <div class="weatherIcon">
               <img id="wicon" src="" alt="weather icon">
             </div>
-            <div class="wind"></div>
-            <div class="humidity"></div>
-            <div class="tempF"></div>
-            <div class="uvIndex"></div>
+            <p><span class="tempF"></span> &#8457;</p>
+            <p><span class="humidity"></span>%</p>
+            <p><span class="wind"></span> MPH</p>     
+            <p>UV Index: <span class="uvIndex"></span></p>
           </main>
         </div>
 
         <div class="row heading">  
-          <h5>5 Day Forecast:</h5>   
+          <div class="col-12">
+            <h6>5 Day Forecast:</h6>   
+          </div>          
         </div>
 
-        <div class="row" id="forecast">
-          <!--<div class="col-sm"></div>
-          <div class="col-sm"></div>
-          <div class="col-sm"></div>
-          <div class="col-sm"></div>
-          <div class="col-sm"></div>-->
+        <div class="row">
+          <div class="col">
+            <div class="card bg-primary text-white border">
+              <div class="card-body">
+                <h6 class="card-title" id="title1"></h6>
+                <img id="image1">
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay1"></span> &#8457;</p>
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay1"></span>%</p>
+              </div>              
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-primary text-white border">
+              <div class="card-body">
+                <h6 class="card-title" id="title2"></h6>
+                <img id="image2">
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay2"></span> &#8457;</p>
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay2"></span>%</p>
+              </div>              
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-primary text-white border">
+              <div class="card-body">
+                <h6 class="card-title" id="title3"></h6>
+                <img id="image3">
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay3"></span> &#8457;</p>
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay3"></span>%</p>
+              </div>              
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-primary text-white border">
+              <div class="card-body">
+                <h6 class="card-title" id="title4"></h6>
+                <img id="image4">
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay4"></span> &#8457;</p>
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay4"></span>%</p>
+              </div>              
+            </div>
+          </div>
+          <div class="col">
+            <div class="card bg-primary text-white border">
+              <div class="card-body">
+                <h6 class="card-title" id="title5"></h6>
+                <img id="image5">
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay5"></span> &#8457;</p>
+                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay5"></span>%</p>
+              </div>              
+            </div>
+          </div>
+          
+
+          
+          
+
+
+
+
+
 
         </div>
 
