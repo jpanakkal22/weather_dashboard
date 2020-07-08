@@ -30,7 +30,7 @@ $(".inputs").on("click", function(){
 
 function callWeather(){
  //Weather API url including search input value and API key
- var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
+ var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
     
  //AJAX call to the OpenWeatherMap API for CURRENT WEATHER
  $.ajax({
@@ -44,7 +44,7 @@ function callWeather(){
  var latitude = JSON.stringify(response.coord.lat);
 
  //Weather API url for UV Index including API key and longitude/latitude coordinates
-   var uvURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
+   var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
 
  // AJAX call to the OpenWeatherMap API for CURRENT UV Index
    $.ajax({
@@ -54,7 +54,7 @@ function callWeather(){
    localStorage.setItem("uvIndex", JSON.stringify(uvIndex));
       
      // Weather API url for 5 day forecast including API key and longitude/latitude coordinates
-       var forecastURL = "http://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
+       var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
              
        //AJAX call to the OpenWeatherMap API for 5 day forecast
        $.ajax({
