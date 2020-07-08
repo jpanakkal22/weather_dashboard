@@ -80,16 +80,17 @@ function callWeather(){
  
 
 function init(){
-  weatherInit = JSON.parse(localStorage.getItem("weather"));
-  uvIndexInit = JSON.parse(localStorage.getItem("uvIndex"));
-  forecastInit = JSON.parse(localStorage.getItem("forecast"));
-  cityArrayInit = JSON.parse(localStorage.getItem("cityArray"));
+  weatherInit = localStorage.getItem("weather");
+  uvIndexInit = localStorage.getItem("uvIndex");
+  forecastInit = localStorage.getItem("forecast");
+  cityArrayInit = localStorage.getItem("cityArray");
+  
 
   if(weatherInit && uvIndexInit && forecastInit && cityArrayInit){
-    weather = weatherInit;
-    uvIndex = uvIndexInit;
-    forecast = forecastInit;
-    cityArray = cityArrayInit;
+    weather = JSON.parse(weatherInit);
+    uvIndex = JSON.parse(uvIndexInit);
+    forecast = JSON.parse(forecastInit);
+    cityArray = JSON.parse(cityArrayInit);
 
     renderWeather();
     renderForecast();
