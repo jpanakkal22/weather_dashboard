@@ -13,9 +13,9 @@ init();
 $(".buttons").on("click", function(event){
   event.preventDefault(); 
 
-// Store search value into variable
-  cityName = $("#input").val().trim(); 
-  cityArray.push(cityName);
+  // Store search value into variable
+  cityName = $("#input").val().trim();
+  cityArray.push(cityName);  
   callWeather();
   renderHistory();
   localStorage.setItem("cityArray", JSON.stringify(cityArray));   
@@ -30,7 +30,7 @@ $(".inputs").on("click", function(){
 
 function callWeather(){
  //Weather API url including search input value and API key
- var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
+ var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
     
  //AJAX call to the OpenWeatherMap API for CURRENT WEATHER
  $.ajax({
@@ -54,7 +54,7 @@ function callWeather(){
    localStorage.setItem("uvIndex", JSON.stringify(uvIndex));
       
      // Weather API url for 5 day forecast including API key and longitude/latitude coordinates
-       var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
+       var forecastURL = "http://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
              
        //AJAX call to the OpenWeatherMap API for 5 day forecast
        $.ajax({
