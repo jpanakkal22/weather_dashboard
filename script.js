@@ -104,7 +104,9 @@ function renderWeather(){
   $(".tempF").text("Temperature: " + tempF.toFixed(2));
   $(".humidity").text("Humidity: " + weather.main.humidity);
   $(".wind").text("Wind Speed: " + weather.wind.speed); 
-  $(".uvIndex").text(uvIndex.value);   
+  $(".uvIndex").text(uvIndex.value); 
+
+  uvColors();  
 
   //Weather Icon
   var iconCode = weather.weather[0].icon;
@@ -183,13 +185,22 @@ function renderHistory(){
   $("#input8").val(cityArray[7]);
 }
 
+function uvColors(){
 
+  var uvVal = uvIndex.value;
 
-
-
-
-
+  if(uvVal < 3){
+    $(".uvIndex").attr("id", "favorable");
+  }
+  else if(uvVal >= 3 && uvVal <= 7){
+    $(".uvIndex").attr("id", "moderate")
+  }
   
+  else {
+    $(".uvIndex").attr("id", "high");
+  }    
+}
+
 
 
  
