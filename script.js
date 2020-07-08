@@ -15,6 +15,11 @@ $(".buttons").on("click", function(event){
 
   // Store search value into variable
   cityName = $("#input").val().trim();
+
+  if(cityArray.includes(cityName.toLowerCase())){
+    callWeather();
+    return;
+  }
   cityArray.push(cityName);  
   callWeather();
   renderHistory();
