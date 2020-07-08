@@ -2,72 +2,77 @@
 var APIKey = "645a6f915fa06385ae3c8b3689dadec1";
 
 var cityArray = [];
+var cityName;
 var weather;
 var uvIndex;
 var forecast;
 
 init();
 
-// Event listener
+// Event listener for main search button
 $(".buttons").on("click", function(event){
   event.preventDefault(); 
-  
+
 // Store search value into variable
-  var cityName = $("#input").val().trim(); 
-  console.log(cityName);
+  cityName = $("#input").val().trim(); 
   cityArray.push(cityName);
+  callWeather();
   renderHistory();
-  localStorage.setItem("cityArray", JSON.stringify(cityArray));    
+  localStorage.setItem("cityArray", JSON.stringify(cityArray));   
+}) 
 
-  //Weather API url including search input value and API key
-  var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
-    
-  //AJAX call to the OpenWeatherMap API for CURRENT WEATHER
-  $.ajax({
-  url: weatherURL,
-  method: "GET"}).then(function(response) {
-  weather = response;
-  localStorage.setItem("weather", JSON.stringify(weather));
-  console.log(weather);
-  
-  
-    
-    
-  //Convert longitude and latitude values into strings and store in variables
-  var longitude = JSON.stringify(response.coord.lon);
-  var latitude = JSON.stringify(response.coord.lat);
+//Event listener for history searches
+$(".inputs").on("click", function(){
+  cityName = $(this).val().trim();
+  console.log(cityName);
+  callWeather();
+})
 
-  //Weather API url for UV Index including API key and longitude/latitude coordinates
-    var uvURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
-
-  // AJAX call to the OpenWeatherMap API for CURRENT UV Index
-    $.ajax({
-    url: uvURL,
-    method: "GET"}).then(function(response) {
-    uvIndex = response; 
-    localStorage.setItem("uvIndex", JSON.stringify(uvIndex));
-    console.log(uvIndex);
+function callWeather(){
+ //Weather API url including search input value and API key
+ var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
     
+ //AJAX call to the OpenWeatherMap API for CURRENT WEATHER
+ $.ajax({
+ url: weatherURL,
+ method: "GET"}).then(function(response) {
+ weather = response;
+ localStorage.setItem("weather", JSON.stringify(weather));
+    
+ //Convert longitude and latitude values into strings and store in variables
+ var longitude = JSON.stringify(response.coord.lon);
+ var latitude = JSON.stringify(response.coord.lat);
 
-      // Weather API url for 5 day forecast including API key and longitude/latitude coordinates
-        var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
-              
-        //AJAX call to the OpenWeatherMap API for 5 day forecast
-        $.ajax({
-        url: forecastURL,
-        method: "GET"
-        }).then(function(response){
-                  ;
-        forecast = response;
-        localStorage.setItem("forecast", JSON.stringify(forecast));  
-        console.log(forecast);
-        renderWeather(); 
-        renderForecast(); 
-                        
-      })    
-    })    
-  })   
-})  
+ //Weather API url for UV Index including API key and longitude/latitude coordinates
+   var uvURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
+
+ // AJAX call to the OpenWeatherMap API for CURRENT UV Index
+   $.ajax({
+   url: uvURL,
+   method: "GET"}).then(function(response) {
+   uvIndex = response; 
+   localStorage.setItem("uvIndex", JSON.stringify(uvIndex));
+      
+     // Weather API url for 5 day forecast including API key and longitude/latitude coordinates
+       var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
+             
+       //AJAX call to the OpenWeatherMap API for 5 day forecast
+       $.ajax({
+       url: forecastURL,
+       method: "GET"
+       }).then(function(response){
+                 ;
+       forecast = response;
+       localStorage.setItem("forecast", JSON.stringify(forecast));  
+       renderWeather(); 
+       renderForecast();                        
+     })    
+   })    
+ })   
+
+}
+ 
+ 
 
 function init(){
   weatherInit = JSON.parse(localStorage.getItem("weather"));
@@ -88,10 +93,10 @@ function init(){
   else{
     return;
   }         
- }
+}
 
-function renderWeather(){  
-  
+ //Function to render current weather
+function renderWeather(){    
   // Convert the temp to fahrenheit
   var tempF = (weather.main.temp - 273.15) * 1.80 + 32;
   
@@ -116,9 +121,8 @@ function renderWeather(){
   renderHistory();
 }
 
-//5 Day forecast 
-function renderForecast(){
-  
+//Function to render 5 day forecast 
+function renderForecast(){  
   //Timestamp
   var m = moment.unix(forecast.daily[0].dt).format("MM-DD-YYYY"); 
   $("#title1").text(m.toString());
@@ -173,8 +177,8 @@ function renderForecast(){
   $("#humDay5").text("Humidity: " + hum5);
 }
 
-function renderHistory(){
-  
+//Function to render history of searches to page
+function renderHistory(){  
   $("#input1").val(cityArray[0]);
   $("#input2").val(cityArray[1]);
   $("#input3").val(cityArray[2]);
@@ -185,21 +189,23 @@ function renderHistory(){
   $("#input8").val(cityArray[7]);
 }
 
+//Function to change color for uv index conditions
 function uvColors(){
-
   var uvVal = uvIndex.value;
-
   if(uvVal < 3){
     $(".uvIndex").attr("id", "favorable");
   }
   else if(uvVal >= 3 && uvVal <= 7){
     $(".uvIndex").attr("id", "moderate")
-  }
-  
+  }  
   else {
     $(".uvIndex").attr("id", "high");
   }    
 }
+
+
+
+
 
 
 
