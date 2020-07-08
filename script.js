@@ -8,36 +8,16 @@ var forecast;
 
 init();
 
-// // localStorage.setItem("Array", JSON.stringify(array));
-
-// // renderWeather();
-// // renderForecast();
-
-
 // Event listener
-$("button").on("click", function(event){
+$(".buttons").on("click", function(event){
   event.preventDefault(); 
   
 // Store search value into variable
   var cityName = $("#input").val().trim(); 
   console.log(cityName);
-  
-
-//     // var y = JSON.parse(localStorage.getItem("Array") || []);
   cityArray.push(cityName);
-  localStorage.setItem("cityArray", JSON.stringify(cityArray));
-//     // localStorage.setItem("Array", JSON.stringify(y));
-    
-//     // $("#list1").text(y[0]);
-//     // $("#list2").text(y[1]);
-//     // $("#list3").text(y[2]);
-//     // $("#list4").text(y[3]);
-//     // $("#list5").text(y[4]);
-//     // $("#list6").text(y[5]);
-//     // $("#list7").text(y[6]);
-//     // $("#list8").text(y[7]);
-
-     
+  renderHistory();
+  localStorage.setItem("cityArray", JSON.stringify(cityArray));    
 
   //Weather API url including search input value and API key
   var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
@@ -83,7 +63,7 @@ $("button").on("click", function(event){
         console.log(forecast);
         renderWeather(); 
         renderForecast(); 
-                
+                        
       })    
     })    
   })   
@@ -193,14 +173,14 @@ function renderForecast(){
 
 function renderHistory(){
   
-  $("#list1").text(cityArray[0]);
-  $("#list2").text(cityArray[1]);
-  $("#list3").text(cityArray[2]);
-  $("#list4").text(cityArray[3]);
-  $("#list5").text(cityArray[4]);
-  $("#list6").text(cityArray[5]);
-  $("#list7").text(cityArray[6]);
-  $("#list8").text(cityArray[7]);
+  $("#input1").val(cityArray[0]);
+  $("#input2").val(cityArray[1]);
+  $("#input3").val(cityArray[2]);
+  $("#input4").val(cityArray[3]);
+  $("#input5").val(cityArray[4]);
+  $("#input6").val(cityArray[5]);
+  $("#input7").val(cityArray[6]);
+  $("#input8").val(cityArray[7]);
 }
 
 
