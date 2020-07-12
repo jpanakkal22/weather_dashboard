@@ -27,8 +27,8 @@ $(".buttons").on("click", function(event){
 }) 
 
 //Event listener for history searches
-$(".inputs").on("click", function(){
-  cityName = $(this).val().trim();
+$(".history").on("click", function(){
+  cityName = $(this).text();
   console.log(cityName);
   callWeather();
 })
@@ -185,14 +185,14 @@ function renderForecast(){
 
 //Function to render history of searches to page
 function renderHistory(){  
-  $("#input1").val(cityArray[0]);
-  $("#input2").val(cityArray[1]);
-  $("#input3").val(cityArray[2]);
-  $("#input4").val(cityArray[3]);
-  $("#input5").val(cityArray[4]);
-  $("#input6").val(cityArray[5]);
-  $("#input7").val(cityArray[6]);
-  $("#input8").val(cityArray[7]);
+  $("#input1").text(cityArray[0]);
+  $("#input2").text(cityArray[1]);
+  $("#input3").text(cityArray[2]);
+  $("#input4").text(cityArray[3]);
+  $("#input5").text(cityArray[4]);
+  $("#input6").text(cityArray[5]);
+  $("#input7").text(cityArray[6]);
+  $("#input8").text(cityArray[7]);
 }
 
 //Function to change color for uv index conditions
