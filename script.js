@@ -12,6 +12,7 @@ init();
 // Event listener for main search button
 $(".buttons").on("click", function(event){
   event.preventDefault(); 
+  console.log(this);
 
   // Store search value into variable
   cityName = $("#input").val().trim();

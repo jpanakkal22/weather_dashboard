@@ -1,7 +1,7 @@
   
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
@@ -15,118 +15,109 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-   
-</head>
-<body>
     
-  <div class="container">
-    <header class="row">
-      <h1>Weather Dashboard</h1>
-    </header>
-    <div class="row">
-      <aside class="col-3 aside"> 
-        <label id="searchLabel">Search for City:</label>
-        <div class="input-group mb-3">         
-          <input type="text" class="form-control" id="input" placeholder="City Name">
-           <div class="input-group-append">
-            <button class="btn btn-primary buttons" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
-          </div>
-          <div class="card" style="width: 18rem; margin-top: 20px;">
-            <button class="bg-primary history" type="button" id="input1"></button>
-            <button class="bg-primary history" type="button" id="input2"></button>
-            <button class="bg-primary history" type="button" id="input3"></button>
-            <button class="bg-primary history" type="button" id="input4"></button>
-            <button class="bg-primary history" type="button" id="input5"></button>
-            <button class="bg-primary history" type="button" id="input6"></button>
-            <button class="bg-primary history" type="button" id="input7"></button>
-            <button class="bg-primary history" type="button" id="input8"></button>                              
+  </head>
+  <body>
+    <div class="container">
+      <div class="row d-flex justify-content-center p-3 bg-dark text-white">
+        <h3>Weather Dashboard</h3>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 p-3 bg-secondary text-white">
+          <label id="searchLabel">Search for City:</label>
+          <div class="input-group mb-3">         
+            <input type="text" class="form-control" id="input" placeholder="City Name">
+            <div class="input-group-append">
+              <button class="btn btn-primary buttons" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>            
+            <div class="btn-group-vertical mt-3" style="width: 18rem;">                
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input1"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input2"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input3"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input4"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input5"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input6"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input7"></button>
+              <button class="btn btn-primary btn-sm history mb-2 rounded" type="button" id="input8"></button> 
+            </div>     
           </div>
         </div>
-      </aside>
-
-      <div class="col-9">
-        <div class="row main1">
-          <main class="col-12 main2">            
-            <h4 class="city"></h4>
-            <h5 class="date"></h5>
-            <div class="weatherIcon">
-              <img id="wicon" src="" alt="weather icon">
+        <div class="col-sm-9">
+          <div class="row border-bottom">
+            <main class="col-12 p-3">            
+              <h4 class="city"></h4>
+              <h5 class="date"></h5>
+              <div class="weatherIcon">
+                <img id="wicon" src="" alt="weather icon">
+              </div>
+              <p><span class="tempF"></span> &#8457;</p>
+              <p><span class="humidity"></span>%</p>
+              <p><span class="wind"></span> MPH</p>     
+              <p>UV Index: <span class="uvIndex"></span></p>
+            </main>
+          </div>
+          <div class="row heading">  
+            <div class="col-12 mt-2">
+              <h5>5 Day Forecast:</h5>   
+            </div>          
+          </div>            
+          <div class="row">
+            <div class="col-sm">
+              <div class="card bg-primary text-white border">
+                <div class="card-body">
+                  <h6 class="card-title" id="title1"></h6>
+                  <img id="image1">
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay1"></span> &#8457;</p>
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay1"></span>%</p>
+                </div>              
+              </div>
             </div>
-            <p><span class="tempF"></span> &#8457;</p>
-            <p><span class="humidity"></span>%</p>
-            <p><span class="wind"></span> MPH</p>     
-            <p>UV Index: <span class="uvIndex"></span></p>
-          </main>
-        </div>
-
-        <div class="row heading">  
-          <div class="col-12">
-            <h6>5 Day Forecast:</h6>   
-          </div>          
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="card bg-primary text-white border">
-              <div class="card-body">
-                <h6 class="card-title" id="title1"></h6>
-                <img id="image1">
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay1"></span> &#8457;</p>
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay1"></span>%</p>
-              </div>              
+            <div class="col-sm">
+              <div class="card bg-primary text-white border">
+                <div class="card-body">
+                  <h6 class="card-title" id="title2"></h6>
+                  <img id="image2">
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay2"></span> &#8457;</p>
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay2"></span>%</p>
+                </div>              
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card bg-primary text-white border">
+                <div class="card-body">
+                  <h6 class="card-title" id="title3"></h6>
+                  <img id="image3">
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay3"></span> &#8457;</p>
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay3"></span>%</p>
+                </div>              
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card bg-primary text-white border">
+                <div class="card-body">
+                  <h6 class="card-title" id="title4"></h6>
+                  <img id="image4">
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay4"></span> &#8457;</p>
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay4"></span>%</p>
+                </div>              
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card bg-primary text-white border">
+                <div class="card-body">
+                  <h6 class="card-title" id="title5"></h6>
+                  <img id="image5">
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay5"></span> &#8457;</p>
+                  <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay5"></span>%</p>
+                </div>              
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card bg-primary text-white border">
-              <div class="card-body">
-                <h6 class="card-title" id="title2"></h6>
-                <img id="image2">
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay2"></span> &#8457;</p>
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay2"></span>%</p>
-              </div>              
-            </div>
-          </div>
-          <div class="col">
-            <div class="card bg-primary text-white border">
-              <div class="card-body">
-                <h6 class="card-title" id="title3"></h6>
-                <img id="image3">
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay3"></span> &#8457;</p>
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay3"></span>%</p>
-              </div>              
-            </div>
-          </div>
-          <div class="col">
-            <div class="card bg-primary text-white border">
-              <div class="card-body">
-                <h6 class="card-title" id="title4"></h6>
-                <img id="image4">
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay4"></span> &#8457;</p>
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay4"></span>%</p>
-              </div>              
-            </div>
-          </div>
-          <div class="col">
-            <div class="card bg-primary text-white border">
-              <div class="card-body">
-                <h6 class="card-title" id="title5"></h6>
-                <img id="image5">
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="tempDay5"></span> &#8457;</p>
-                <p style="font-size: 12px;"><span class="card-text" style="font-size: 12px;" id="humDay5"></span>%</p>
-              </div>              
-            </div>
-          </div>
-
-        </div>
-
-      </div>       
-
-    </div>
-
-  </div>   
-    
-</body>
-
+        </div>        
+      </div>      
+    </div>   
+  </body>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="moment.js"></script>  
   <script src="script.js"></script>
