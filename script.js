@@ -20,9 +20,10 @@ $(".buttons").on("click", function(event){
     callWeather();
     return;
   }
-  cityArray.push(cityName);  
+   
   callWeather();
   renderHistory();
+  updateArray();
   localStorage.setItem("cityArray", JSON.stringify(cityArray));   
 }) 
 
@@ -76,8 +77,6 @@ function callWeather(){
  })   
 
 }
- 
- 
 
 function init(){
   weatherInit = localStorage.getItem("weather");
@@ -207,6 +206,15 @@ function uvColors(){
   else {
     $(".uvIndex").attr("id", "high");
   }    
+}
+
+//Function to push and shift items into array
+function updateArray(){
+  var len = cityArray.length;
+  cityArray.push(cityName); 
+  if(len >= 8){
+    cityArray.shift();    
+  }
 }
 
 
