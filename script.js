@@ -1,27 +1,33 @@
 // API key
 var APIKey = "645a6f915fa06385ae3c8b3689dadec1";
 
+// Declare variables cityArray, cityName, weather, uvIndex, forecast
 var cityArray = [];
 var cityName;
 var weather;
 var uvIndex;
 var forecast;
 
+// Call init function
 init();
 
 // Event listener for main search button
+
+// jQuery event delegation on main search button and all history buttons
 $(".buttons").on("click", function(event){
   event.preventDefault(); 
   console.log(this);
 
-  // Store search value into variable
+  // Update global variable cityName with search value
   cityName = $("#input").val().trim();
 
+  // If global variable cityArray contains the city name that is searched, call callWeather function
   if(cityArray.includes(cityName.toLowerCase())){
     callWeather();
     return;
   }
-   
+  
+  // This probably should be an else statement. If city searched is not in history, call 3 functions: callWeather, renderHistory, and updatedArray. Stringify cityArray and set to local storage key 'cityArray'
   callWeather();
   renderHistory();
   updateArray();
@@ -30,8 +36,10 @@ $(".buttons").on("click", function(event){
 
 //Event listener for history searches
 $(".history").on("click", function(){
+  //Event delegation, update global cityName variable to the history button text
   cityName = $(this).text();
-  console.log(cityName);
+  // console.log(cityName);
+  // When a history button is clicked, call callWeather function to display weather
   callWeather();
 })
 
@@ -43,7 +51,10 @@ function callWeather(){
  $.ajax({
  url: weatherURL,
  method: "GET"}).then(function(response) {
+  //  console.log(response);
+  // Update global weather variable with API response
  weather = response;
+ // Stringify and set weather variable into local storage key 'weather'
  localStorage.setItem("weather", JSON.stringify(weather));
     
  //Convert longitude and latitude values into strings and store in variables
@@ -57,7 +68,9 @@ function callWeather(){
    $.ajax({
    url: uvURL,
    method: "GET"}).then(function(response) {
+     // Update global variable uvIndex with response 
    uvIndex = response; 
+   // Stringify and set uvIndex variable into local storage key 'uvIndex'
    localStorage.setItem("uvIndex", JSON.stringify(uvIndex));
       
      // Weather API url for 5 day forecast including API key and longitude/latitude coordinates
@@ -69,8 +82,11 @@ function callWeather(){
        method: "GET"
        }).then(function(response){
                  ;
+        // update global variable forecast with response
        forecast = response;
-       localStorage.setItem("forecast", JSON.stringify(forecast));  
+       // Stringify and set forecast variable into local storage key 'forecast'
+       localStorage.setItem("forecast", JSON.stringify(forecast));
+       // Call renderWeather and renderForecast functions  
        renderWeather(); 
        renderForecast();                        
      })    
@@ -79,23 +95,26 @@ function callWeather(){
 
 }
 
+// Initialize application with data stored in local storage
 function init(){
   weatherInit = localStorage.getItem("weather");
   uvIndexInit = localStorage.getItem("uvIndex");
   forecastInit = localStorage.getItem("forecast");
   cityArrayInit = localStorage.getItem("cityArray");
   
-
+  // If there is data in local storage, update global variables with the parsed data
   if(weatherInit && uvIndexInit && forecastInit && cityArrayInit){
     weather = JSON.parse(weatherInit);
     uvIndex = JSON.parse(uvIndexInit);
     forecast = JSON.parse(forecastInit);
     cityArray = JSON.parse(cityArrayInit);
 
+      // Call 3 functions and render local storage data to application
     renderWeather();
     renderForecast();
     renderHistory();
   }
+  // Or else do nothing
   else{
     return;
   }         
@@ -117,6 +136,7 @@ function renderWeather(){
   $(".wind").text("Wind Speed: " + weather.wind.speed); 
   $(".uvIndex").text(uvIndex.value); 
 
+  // call function uvColors to set background color of uv index
   uvColors();  
 
   //Weather Icon
@@ -124,6 +144,7 @@ function renderWeather(){
   var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
   $("#wicon").attr("src", iconURL); 
 
+  // call renderHistory function to add searched name to history button
   renderHistory();
 }
 
@@ -198,6 +219,8 @@ function renderHistory(){
 //Function to change color for uv index conditions
 function uvColors(){
   var uvVal = uvIndex.value;
+
+  // change background colors using CSS
   if(uvVal < 3){
     $(".uvIndex").attr("id", "favorable");
   }
@@ -209,10 +232,12 @@ function uvColors(){
   }    
 }
 
-//Function to push and shift items into array
+//Function to push and shift items into cityArray
 function updateArray(){
   var len = cityArray.length;
+  // take city name and add to city array
   cityArray.push(cityName); 
+  // if cityArray length is >= 8, remove first item from array
   if(len >= 8){
     cityArray.shift();    
   }
