@@ -20,7 +20,7 @@
 No installation needed.
 
 ## Usage
-This application uses a third party API, OpenWeather API to retrieve weather data for cities. The data that is displayed includes city name, date, an icon representing current weather conditions, temperature, humidity, wind speed and UV index. The UV index is also color coded to show favorable, moderate or severe conditions. Local storage is used to store persistent data. 
+This application uses a third party API, OpenWeatherMap API to retrieve weather data for cities. The data that is displayed includes city name, date, an icon representing current weather conditions, temperature, humidity, wind speed and UV index. The UV index is also color coded to show favorable, moderate or severe conditions. Local storage is used to store persistent data. 
 
 ## License
 None
@@ -37,7 +37,6 @@ None
 ## Questions?
 [jpanakkal22](https://github.com/jpanakkal22)
 
-You can also contact me at josh_panakkal3122@hotmail.com
 
 
 
