@@ -3,7 +3,8 @@ var APIKey = "645a6f915fa06385ae3c8b3689dadec1";
 
 // Declare variables cityArray, cityName, weather, uvIndex, forecast
 var cityArray = [];
-var cityName;
+// Cleveland is the default value until updated
+var cityName = "Cleveland";
 var weather;
 var uvIndex;
 var forecast;
@@ -114,9 +115,12 @@ function init(){
     renderForecast();
     renderHistory();
   }
-  // Or else do nothing
+  // Or else, use cityName "Cleveland" to update dashboard and local storage
   else{
-    return;
+    callWeather();
+    renderHistory();
+    updateArray();
+    localStorage.setItem("cityArray", JSON.stringify(cityArray));
   }         
 }
 
