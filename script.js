@@ -2,7 +2,7 @@
 var APIKey = "645a6f915fa06385ae3c8b3689dadec1";
 
 // Declare variables cityArray, cityName, weather, uvIndex, forecast
-var cityArray = [];
+var cityArray = ["Chicago", "Dallas", "Green Bay", "Tampa", "Los Angeles", "Seattle", "Las Vegas"];
 // Cleveland is the default value until updated
 var cityName = "Cleveland";
 var weather;
@@ -210,6 +210,7 @@ function renderForecast(){
 
 //Function to render history of searches to page
 function renderHistory(){  
+  console.log(cityArray);
   $("#input1").text(cityArray[0]);
   $("#input2").text(cityArray[1]);
   $("#input3").text(cityArray[2]);
