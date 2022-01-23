@@ -9,28 +9,6 @@ let weather;
 let uvIndex;
 let forecast;
 
-// Call init function
-init();
-
-// Event listener for main search button
-// jQuery event delegation on main search button and all history buttons
-$(".buttons").on("click", (event) => {
-  event.preventDefault();  
-
-  // Update global variable cityName with search value
-  cityName = $("#input").val().trim();
-  callWeather();  
-}) 
-
-//Event listener for history searches
-$(".history").on("click", () => {
-  //Event delegation, update global cityName variable to the history button text
-  cityName = $(this).text();
-  
-  // When a history button is clicked, call callWeather function to display weather
-  callWeather();
-})
-
 const callWeather = () => {
   //Weather API url including search input value and API key
   const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
@@ -76,7 +54,7 @@ const callWeather = () => {
     })     
   })      
   .catch(error => {
-   console.log(error)
+  //  console.log(error)
   })
 }
 
@@ -229,6 +207,28 @@ const updateArray = (city) => {
   // Update local storage with updated cityArray
   localStorage.setItem("cityArray", JSON.stringify(cityArray));
 }
+
+// Call init function
+init();
+
+// Event listener for main search button
+// jQuery event delegation on main search button and all history buttons
+$(".buttons").on("click", function(event) {
+  event.preventDefault();  
+
+  // Update global variable cityName with search value
+  cityName = $("#input").val().trim();
+  callWeather();  
+}) 
+
+//Event listener for history searches
+$(".history").on("click", function() {  
+  //Event delegation, update global cityName variable to the history button text
+  cityName = $(this).text();
+  
+  // When a history button is clicked, call callWeather function to display weather
+  callWeather();
+})
 
 
 
