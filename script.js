@@ -42,8 +42,7 @@ const callWeather = () => {
       const forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude={minutely}&appid=" + APIKey;    
            
       //AJAX call to the OpenWeatherMap API for 5 day forecast    
-      $.get(forecastURL, (response) => {
-        console.log(response)
+      $.get(forecastURL, (response) => {        
         // update global variable forecast with response
         forecast = response;
         // Stringify and set forecast variable into local storage key 'forecast'
@@ -55,7 +54,7 @@ const callWeather = () => {
     })     
   })      
   .catch(error => {
-  //  console.log(error)
+    alert(`City ${error.statusText}`);
   })
 }
 
