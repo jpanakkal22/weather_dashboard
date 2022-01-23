@@ -43,6 +43,7 @@ const callWeather = () => {
            
       //AJAX call to the OpenWeatherMap API for 5 day forecast    
       $.get(forecastURL, (response) => {
+        console.log(response)
         // update global variable forecast with response
         forecast = response;
         // Stringify and set forecast variable into local storage key 'forecast'
@@ -88,14 +89,14 @@ const init = () => {
 const renderWeather = () => {    
   // Convert the temp to fahrenheit
   const tempF = (weather.main.temp - 273.15) * 1.80 + 32;
-  
+    
   //Convert timestamp to readable format
   const m = moment.unix(weather.dt).format("M-DD-YYYY");      
   $(".date").text("(" + m.toString(2) + ")"); 
     
   // Transfer content to HTML
   $(".city").text(weather.name);
-  $(".tempF").text("Temperature: " + tempF.toFixed(2));
+  $(".tempF").text("Temperature: " + tempF.toFixed());
   $(".humidity").text("Humidity: " + weather.main.humidity);
   $(".wind").text("Wind Speed: " + weather.wind.speed); 
   $(".uvIndex").text(uvIndex.value); 
@@ -145,15 +146,15 @@ const renderForecast = () => {
 
   //Temperature / Convert the temp to fahrenheit
   const tempDay1 = (forecast.daily[0].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay1").text("Temp: " + tempDay1.toFixed(2));
+  $("#tempDay1").text("Temp: " + tempDay1.toFixed());
   const tempDay2 = (forecast.daily[1].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay2").text("Temp: " + tempDay2.toFixed(2));
+  $("#tempDay2").text("Temp: " + tempDay2.toFixed());
   const tempDay3 = (forecast.daily[2].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay3").text("Temp: " + tempDay3.toFixed(2));
+  $("#tempDay3").text("Temp: " + tempDay3.toFixed());
   const tempDay4 = (forecast.daily[3].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay4").text("Temp: " + tempDay4.toFixed(2));
+  $("#tempDay4").text("Temp: " + tempDay4.toFixed());
   const tempDay5 = (forecast.daily[4].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay5").text("Temp: " + tempDay5.toFixed(2));
+  $("#tempDay5").text("Temp: " + tempDay5.toFixed());
 
   //Humidity
   const hum1 = forecast.daily[0].humidity;
