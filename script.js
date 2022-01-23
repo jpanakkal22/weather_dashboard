@@ -113,59 +113,79 @@ const renderWeather = () => {
 }
 
 //Function to render 5 day forecast 
-const renderForecast = () => {  
-  //Timestamp
-  const m = moment.unix(forecast.daily[0].dt).format("MM-DD-YYYY"); 
-  $("#title1").text(m.toString());
-  const m1 = moment.unix(forecast.daily[1].dt).format("MM-DD-YYYY"); 
-  $("#title2").text(m1.toString());
-  const m2 = moment.unix(forecast.daily[2].dt).format("MM-DD-YYYY"); 
-  $("#title3").text(m2.toString());
-  const m3 = moment.unix(forecast.daily[3].dt).format("MM-DD-YYYY"); 
-  $("#title4").text(m3.toString());
-  const m4 = moment.unix(forecast.daily[4].dt).format("MM-DD-YYYY"); 
-  $("#title5").text(m4.toString());
+const renderForecast = () => { 
+  console.log(forecast) 
+  
+  for(let i = 0; i < 5; i++) {
+    //Timestamp
+    let m = moment.unix(forecast.daily[i].dt).format("MM-DD-YYYY"); 
+    $(`#title${i}`).text(m.toString());
+
+    //Weather Icon
+    let iconCode = forecast.daily[i].weather[0].icon;
+    let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    $(`#image${i}`).attr("src", iconURL).attr("alt", "Weather Icon");
+
+    //Temperature / Convert the temp to fahrenheit
+    let tempDay = (forecast.daily[i].temp.max - 273.15) * 1.80 + 32;
+    $(`#tempDay${i}`).text("Temp: " + tempDay.toFixed());
+
+    //Humidity
+    let hum = forecast.daily[i].humidity;
+    $(`#humDay${i}`).text("Humidity: " + hum);
+
+  }
+  // const m = moment.unix(forecast.daily[0].dt).format("MM-DD-YYYY"); 
+  // $("#title1").text(m.toString());
+  // const m1 = moment.unix(forecast.daily[1].dt).format("MM-DD-YYYY"); 
+  // $("#title2").text(m1.toString());
+  // const m2 = moment.unix(forecast.daily[2].dt).format("MM-DD-YYYY"); 
+  // $("#title3").text(m2.toString());
+  // const m3 = moment.unix(forecast.daily[3].dt).format("MM-DD-YYYY"); 
+  // $("#title4").text(m3.toString());
+  // const m4 = moment.unix(forecast.daily[4].dt).format("MM-DD-YYYY"); 
+  // $("#title5").text(m4.toString());
 
   //Weather Icon  
-  const iconCode = forecast.daily[0].weather[0].icon;
-  const iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
-  $("#image1").attr("src", iconURL).attr("alt", "Weather Icon");
-  const iconCode1 = forecast.daily[1].weather[0].icon;
-  const iconURL1 = "http://openweathermap.org/img/w/" + iconCode1 + ".png";
-  $("#image2").attr("src", iconURL1).attr("alt", "Weather Icon");
-  const iconCode2 = forecast.daily[2].weather[0].icon;
-  const iconURL2 = "http://openweathermap.org/img/w/" + iconCode2 + ".png";
-  $("#image3").attr("src", iconURL2).attr("alt", "Weather Icon");
-  const iconCode3 = forecast.daily[3].weather[0].icon;
-  const iconURL3 = "http://openweathermap.org/img/w/" + iconCode3 + ".png";
-  $("#image4").attr("src", iconURL3).attr("alt", "Weather Icon");
-  const iconCode4 = forecast.daily[4].weather[0].icon;
-  const iconURL4 = "http://openweathermap.org/img/w/" + iconCode4 + ".png";
-  $("#image5").attr("src", iconURL4).attr("alt", "Weather Icon");
+  // const iconCode = forecast.daily[0].weather[0].icon;
+  // const iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+  // $("#image1").attr("src", iconURL).attr("alt", "Weather Icon");
+  // const iconCode1 = forecast.daily[1].weather[0].icon;
+  // const iconURL1 = "http://openweathermap.org/img/w/" + iconCode1 + ".png";
+  // $("#image2").attr("src", iconURL1).attr("alt", "Weather Icon");
+  // const iconCode2 = forecast.daily[2].weather[0].icon;
+  // const iconURL2 = "http://openweathermap.org/img/w/" + iconCode2 + ".png";
+  // $("#image3").attr("src", iconURL2).attr("alt", "Weather Icon");
+  // const iconCode3 = forecast.daily[3].weather[0].icon;
+  // const iconURL3 = "http://openweathermap.org/img/w/" + iconCode3 + ".png";
+  // $("#image4").attr("src", iconURL3).attr("alt", "Weather Icon");
+  // const iconCode4 = forecast.daily[4].weather[0].icon;
+  // const iconURL4 = "http://openweathermap.org/img/w/" + iconCode4 + ".png";
+  // $("#image5").attr("src", iconURL4).attr("alt", "Weather Icon");
 
   //Temperature / Convert the temp to fahrenheit
-  const tempDay1 = (forecast.daily[0].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay1").text("Temp: " + tempDay1.toFixed());
-  const tempDay2 = (forecast.daily[1].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay2").text("Temp: " + tempDay2.toFixed());
-  const tempDay3 = (forecast.daily[2].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay3").text("Temp: " + tempDay3.toFixed());
-  const tempDay4 = (forecast.daily[3].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay4").text("Temp: " + tempDay4.toFixed());
-  const tempDay5 = (forecast.daily[4].temp.max - 273.15) * 1.80 + 32;
-  $("#tempDay5").text("Temp: " + tempDay5.toFixed());
+  // const tempDay1 = (forecast.daily[0].temp.max - 273.15) * 1.80 + 32;
+  // $("#tempDay1").text("Temp: " + tempDay1.toFixed());
+  // const tempDay2 = (forecast.daily[1].temp.max - 273.15) * 1.80 + 32;
+  // $("#tempDay2").text("Temp: " + tempDay2.toFixed());
+  // const tempDay3 = (forecast.daily[2].temp.max - 273.15) * 1.80 + 32;
+  // $("#tempDay3").text("Temp: " + tempDay3.toFixed());
+  // const tempDay4 = (forecast.daily[3].temp.max - 273.15) * 1.80 + 32;
+  // $("#tempDay4").text("Temp: " + tempDay4.toFixed());
+  // const tempDay5 = (forecast.daily[4].temp.max - 273.15) * 1.80 + 32;
+  // $("#tempDay5").text("Temp: " + tempDay5.toFixed());
 
   //Humidity
-  const hum1 = forecast.daily[0].humidity;
-  $("#humDay1").text("Humidity: " + hum1);
-  const hum2 = forecast.daily[1].humidity;
-  $("#humDay2").text("Humidity: " + hum2);
-  const hum3 = forecast.daily[2].humidity;
-  $("#humDay3").text("Humidity: " + hum3);
-  const hum4 = forecast.daily[3].humidity;
-  $("#humDay4").text("Humidity: " + hum4);
-  const hum5 = forecast.daily[4].humidity;
-  $("#humDay5").text("Humidity: " + hum5);
+  // const hum1 = forecast.daily[0].humidity;
+  // $("#humDay1").text("Humidity: " + hum1);
+  // const hum2 = forecast.daily[1].humidity;
+  // $("#humDay2").text("Humidity: " + hum2);
+  // const hum3 = forecast.daily[2].humidity;
+  // $("#humDay3").text("Humidity: " + hum3);
+  // const hum4 = forecast.daily[3].humidity;
+  // $("#humDay4").text("Humidity: " + hum4);
+  // const hum5 = forecast.daily[4].humidity;
+  // $("#humDay5").text("Humidity: " + hum5);
 }
 
 //Function to render history of searches to page
