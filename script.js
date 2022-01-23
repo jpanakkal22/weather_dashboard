@@ -14,27 +14,16 @@ init();
 
 // Event listener for main search button
 // jQuery event delegation on main search button and all history buttons
-$(".buttons").on("click", function(event){
+$(".buttons").on("click", (event) => {
   event.preventDefault();  
 
   // Update global variable cityName with search value
   cityName = $("#input").val().trim();
-  callWeather();
-  // If global variable cityArray contains the city name that is searched, call callWeather function
-  // if(cityArray.includes(cityName.toLowerCase())){
-  //   callWeather();
-  //   return;
-  // } else {
-  //   //If city searched is not in history, call 3 functions: callWeather, renderHistory, and updatedArray. Stringify cityArray and set to local storage key 'cityArray'
-  //   callWeather();   
-  //   updateArray();
-  //   localStorage.setItem("cityArray", JSON.stringify(cityArray));
-  //   renderHistory();  
-  // }    
+  callWeather();  
 }) 
 
 //Event listener for history searches
-$(".history").on("click", function(){
+$(".history").on("click", () => {
   //Event delegation, update global cityName variable to the history button text
   cityName = $(this).text();
   
@@ -42,7 +31,7 @@ $(".history").on("click", function(){
   callWeather();
 })
 
-function callWeather(){
+const callWeather = () => {
   //Weather API url including search input value and API key
   const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&cnt={5}&appid=" + APIKey;  
       
@@ -54,8 +43,7 @@ function callWeather(){
     localStorage.setItem("weather", JSON.stringify(weather));
 
     if(!cityArray.includes(response.name)){
-      updateArray(response.name);
-      console.log(cityArray);
+      updateArray(response.name);      
     }
         
     //Convert longitude and latitude values into strings and store in variables
@@ -85,8 +73,7 @@ function callWeather(){
         renderWeather(); 
         renderForecast();                        
       })    
-    })    
-    
+    })     
   })      
   .catch(error => {
    console.log(error)
@@ -94,7 +81,7 @@ function callWeather(){
 }
 
 // Initialize application with data stored in local storage
-function init(){
+const init = () => {
   weatherInit = localStorage.getItem("weather");
   uvIndexInit = localStorage.getItem("uvIndex");
   forecastInit = localStorage.getItem("forecast");
@@ -106,8 +93,7 @@ function init(){
     uvIndex = JSON.parse(uvIndexInit);
     forecast = JSON.parse(forecastInit);
     cityArray = JSON.parse(cityArrayInit);
-
-      // Call 3 functions and render local storage data to application
+    // Call 3 functions and render local storage data to application
     renderWeather();
     renderForecast();
     renderHistory();
@@ -120,8 +106,8 @@ function init(){
   }         
 }
 
- //Function to render current weather
-function renderWeather(){    
+//Function to render current weather
+const renderWeather = () => {    
   // Convert the temp to fahrenheit
   const tempF = (weather.main.temp - 273.15) * 1.80 + 32;
   
@@ -149,7 +135,7 @@ function renderWeather(){
 }
 
 //Function to render 5 day forecast 
-function renderForecast(){  
+const renderForecast = () => {  
   //Timestamp
   const m = moment.unix(forecast.daily[0].dt).format("MM-DD-YYYY"); 
   $("#title1").text(m.toString());
@@ -205,7 +191,7 @@ function renderForecast(){
 }
 
 //Function to render history of searches to page
-function renderHistory(){  
+const renderHistory = () => {  
   $("#input1").text(cityArray[0]);
   $("#input2").text(cityArray[1]);
   $("#input3").text(cityArray[2]);
@@ -217,9 +203,8 @@ function renderHistory(){
 }
 
 //Function to change color for uv index conditions
-function uvColors(){
+const uvColors = () => {
   const uvVal = uvIndex.value;
-
   // change background colors using CSS
   if(uvVal < 3){
     $(".uvIndex").attr("id", "favorable");
@@ -233,7 +218,7 @@ function uvColors(){
 }
 
 //Function to push and shift items into cityArray
-function updateArray(city){
+const updateArray = (city) => {
   const len = cityArray.length;
   // take city name and add to city array
   cityArray.push(city); 
